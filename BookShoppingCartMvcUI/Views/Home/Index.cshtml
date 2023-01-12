@@ -1,8 +1,51 @@
 ﻿@{
-    ViewData["Title"] = "Home Page";
+
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://docs.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
+<div class="my-2">
+    <form class="row row-cols-lg-auto g-3 align-items-center">
+        <div class="col-12">
+            <label class="visually-hidden" for="inlineFormSelectPref">Genres</label>
+            <select class="form-select" id="genreId">
+                <option selected>Choose...</option>
+                <option value="1">Action</option>
+                <option value="2">Horror</option>
+                <option value="3">Romance</option>
+                <option value="3">ScienceFiction</option>
+            </select>
+        </div>
+
+        <div class="col-12">
+            <label class="visually-hidden" for="inlineFormInputGroupUsername">Search by title</label>
+            <div class="input-group">
+                <div class="input-group-text"></div>
+                <input type="text" class="form-control" id="" placeholder="Sarch by title">
+            </div>
+        </div>
+
+        <div class="col-12">
+            <button type="submit" class="btn btn-primary">Search</button>
+        </div>
+    </form>
 </div>
+
+<div class="w-100 mt-4 d-flex flex-wrap ">
+    @for (int i = 1; i <= 9; i++)
+    {
+        <div class="card mx-2 mb-4" style="width: 16rem;">
+            <img src="" class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">Book title</h5>
+                <p class="card-text">
+                    Author:
+                    Price:
+                </p>
+               <a href="#" class="btn btn-primary">Add to cart</a>
+            </div>
+        </div>
+    }
+</div>
+
+
+
+
