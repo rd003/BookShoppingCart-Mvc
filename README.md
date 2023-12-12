@@ -7,20 +7,20 @@ There is no admin panel for adding products, I have directly added it to the dat
 ## How to run it
 1. clone the project
    `git clone https://github.com/rd003/BookShoppingCart-Mvc`
-2. open `appsettings.json` file and update connection string's `data source=your server name`
+2. open `appsettings.json` file and update connection string
 3. 
    "ConnectionStrings": {
   "conn": "data source=your_server_name;initial catalog=MovieStoreMvc; integrated security=true;encrypt=false"
    }
    
-5. Delete `Migrations` folder
-6. Open Tools > Package Manager > Package manager console
-7. Run these 2 commands
+4. Delete `Migrations` folder
+5. Open Tools > Package Manager > Package manager console
+6. Run these 2 commands
     ```
      (i) add-migration init
      (ii) update-database
      ````
-8. Now you can run this project
+7. Now you can run this project
 
 ## How to register as admin and login??
 
