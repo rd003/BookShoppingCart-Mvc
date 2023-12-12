@@ -10,7 +10,7 @@ There is no admin panel for adding products, I have directly added it to the dat
 2. open `appsettings.json` file and update connection string's `data source=your server name`
 3. 
    "ConnectionStrings": {
-  "conn": "data source=RAVINDRA\\MSSQLSERVER01;initial catalog=MovieStoreMvc; integrated security=true;encrypt=false"
+  "conn": "data source=your_server_name;initial catalog=MovieStoreMvc; integrated security=true;encrypt=false"
    }
    
 5. Delete `Migrations` folder
