@@ -116,14 +116,14 @@ namespace BookShoppingCartMvcUI.Repositories
 
         public async Task<int> GetCartItemCount(string userId = "")
         {
-            if (!string.IsNullOrEmpty(userId))
+            if (string.IsNullOrEmpty(userId)) // updated line
             {
                 userId = GetUserId();
             }
             var data = await (from cart in _db.ShoppingCarts
                               join cartDetail in _db.CartDetails
                               on cart.Id equals cartDetail.ShoppingCartId
-                              where cart.UserId == userId // new line
+                              where cart.UserId==userId // updated line
                               select new { cartDetail.Id }
                         ).ToListAsync();
             return data.Count;
