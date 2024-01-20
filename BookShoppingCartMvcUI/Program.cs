@@ -20,10 +20,11 @@ builder.Services.AddTransient<IHomeRepository,HomeRepository>();
 builder.Services.AddTransient<ICartRepository,CartRepository>();
 builder.Services.AddTransient<IUserOrderRepository,UserOrderRepository>();
 var app = builder.Build();
-using (var scope = app.Services.CreateScope())
-{
-    await DbSeeder.SeedDefaultData(scope.ServiceProvider);
-}
+// Uncomment it when you run the project first time, It will registered an admin
+//using (var scope = app.Services.CreateScope())
+//{
+//    await DbSeeder.SeedDefaultData(scope.ServiceProvider);
+//}
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
