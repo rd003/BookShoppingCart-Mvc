@@ -3,6 +3,10 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
 
 📢 Initially , this project was built with .net 7.  But it works fine with .net 6+ and now it is **Upgraded to .net 8.0.** I will try to keep it up to date.
 
+## Screenshots
+
+![homepage](https://github.com/rd003/BookShoppingCart-Mvc/blob/master/screenshot1.jpg)
+
 ## Tech stack 🧑‍💻
    - Dotnet core mvc
    - MS SQL (Database)
