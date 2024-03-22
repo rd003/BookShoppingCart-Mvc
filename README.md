@@ -9,7 +9,7 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
    - Entity Framework Core (ORM)
    - Bootstrap (frontend)
 #### Note ⚠️
-There is **no admin panel** for adding the products. Since I've already built multiple tutorials on CRUD related projects, so I do not want to waste the time to create the data entry system. I have directly added data to the database. [Needed data is provided in scripts in this doc](https://github.com/rd003/BookShoppingCart-Mvc/edit/master/README.md#data-entry-).
+There is **no admin panel** for adding the products. Since I've already built multiple tutorials on CRUD related projects, so I do not want to waste the time to create the data entry system. I have directly added data to the database. [Needed data is provided in scripts in this doc](https://github.com/rd003/BookShoppingCart-Mvc/blob/master/README.md#data-entry-).
 If you are new to .net then I will recommend you to follow the full playlist of this project to understand the working.
 
 #### Video tutorial 📺
