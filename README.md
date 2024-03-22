@@ -1,8 +1,18 @@
 # BookShoppingCartMvc
-Upgraded to .net 8.0
+Tried to explain how shopping cart works in dot net. A ⭐ in repository is highly appreciated, helps to promote my content.
 
+* Upgraded to .net 8.0. I will try to keep it up to date.
+
+## Tech stack
+   - Dotnet core mvc
+   - MS SQL (Database)
+   - Entity Framework Core (ORM)
+   - Bootstrap (frontend)
 ## Note
-There is no admin panel for adding products, I have directly added it to the database. I recommend you to follow the tutorial.
+There is *no admin panel* for adding products, I have directly added it to the database. I recommend you to follow the tutorial.
+
+## Video tutorial
+   [Youtube playlist](https://www.youtube.com/watch?v=R4ZLWD89R5w&list=PLP8UhDwXI7f_8r2Rbt7GNwf7eXZqUu_p4)
 
 ## How to run it
 1. clone the project
