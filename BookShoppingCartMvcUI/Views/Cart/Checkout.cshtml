@@ -1,0 +1,51 @@
+﻿@model CheckoutModel
+@{
+    ViewData["Title"] = "Checkout";
+}
+
+<h2>Checkout</h2>
+<form asp-action="Checkout">
+    <div class="py-2">
+        <label asp-for="Name">Name*</label>
+        <input type="text" class="form-control" asp-for="Name" />
+        <span asp-validation-for="Name" class="text-danger"></span>
+    </div>
+
+    <div class="py-2">
+        <label asp-for="Email">Email*</label>
+        <input type="text" class="form-control" asp-for="Email" />
+        <span asp-validation-for="Email" class="text-danger"></span>
+
+    </div>
+
+    <div class="py-2">
+        <label asp-for="MobileNumber">MobileNumber*</label>
+        <input type="text" class="form-control" asp-for="MobileNumber" />
+        <span asp-validation-for="MobileNumber" class="text-danger"></span>
+    </div>
+
+
+    <div class="py-2">
+        <label asp-for="Address">Address*</label>
+        <textarea class="form-control" asp-for="Address" rows="5"> </textarea>
+        <span asp-validation-for="Address" class="text-danger"></span>
+    </div>
+
+    <div class="py-2">
+        <span class="mr-2">COD*</span>
+        <select asp-for="PaymentMethod" class="form-control">
+            <option value="">Select Payment Method</option>
+            @foreach (var method in Enum.GetValues(typeof(BookShoppingCartMvcUI.Constants.PaymentMethods)))
+            {
+                <option value="@method.ToString()">@method.ToString()</option>
+
+            }
+        </select>
+        <span asp-validation-for="PaymentMethod" class="text-danger"></span>
+    </div>
+
+    <div class="py-2">
+        <button type="submit" c class="btn btn-info">Next</button>
+
+    </div>
+</form>

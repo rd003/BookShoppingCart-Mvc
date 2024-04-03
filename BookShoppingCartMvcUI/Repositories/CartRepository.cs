@@ -129,7 +129,7 @@ namespace BookShoppingCartMvcUI.Repositories
             return data.Count;
         }
 
-        public async Task<bool> DoCheckout()
+        public async Task<bool> DoCheckout(CheckoutModel model)
         {
             using var transaction = _db.Database.BeginTransaction();
             try
@@ -146,11 +146,20 @@ namespace BookShoppingCartMvcUI.Repositories
                                     .Where(a => a.ShoppingCartId == cart.Id).ToList();
                 if (cartDetail.Count == 0)
                     throw new Exception("Cart is empty");
+                var pendingRecord = _db.orderStatuses.FirstOrDefault(s => s.StatusName == "Pending");
+                if (pendingRecord is null)
+                    throw new Exception("Order status does not have Pending status");
                 var order = new Order
                 {
                     UserId = userId,
                     CreateDate = DateTime.UtcNow,
-                    OrderStatusId = 1//pending
+                    Name=model.Name,
+                    Email=model.Email,
+                    MobileNumber=model.MobileNumber,
+                    PaymentMethod=model.PaymentMethod,
+                    Address=model.Address,
+                    IsPaid=false,
+                    OrderStatusId = pendingRecord.Id
                 };
                 _db.Orders.Add(order);
                 _db.SaveChanges();
@@ -173,7 +182,7 @@ namespace BookShoppingCartMvcUI.Repositories
                 transaction.Commit();
                 return true;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
 
                 return false;
