@@ -18,19 +18,22 @@ namespace BookShoppingCartMvcUI.Repositories
             _httpContextAccessor = httpContextAccessor;
             _userManager = userManager;
         }
-        public async Task<IEnumerable<Order>> UserOrders()
+        public async Task<IEnumerable<Order>> UserOrders(bool getAll=false)
         {
-            var userId = GetUserId();
-            if (string.IsNullOrEmpty(userId))
-                throw new Exception("User is not logged-in");
-            var orders = await _db.Orders
-                            .Include(x=>x.OrderStatus)
-                            .Include(x=>x.OrderDetail)
-                            .ThenInclude(x=>x.Book)
-                            .ThenInclude(x=>x.Genre)
-                            .Where(a=>a.UserId==userId)
-                            .ToListAsync();
-            return orders;
+            var orders =  _db.Orders
+                            .Include(x => x.OrderStatus)
+                            .Include(x => x.OrderDetail)
+                            .ThenInclude(x => x.Book)
+                            .ThenInclude(x => x.Genre).AsQueryable();
+            if (!getAll) {
+                var userId = GetUserId();
+                if (string.IsNullOrEmpty(userId))
+                    throw new Exception("User is not logged-in");
+                orders=orders.Where(a => a.UserId == userId);
+                return await orders.ToListAsync();
+            }
+            
+            return await orders.ToListAsync();
         }
 
         private string GetUserId()
