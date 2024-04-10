@@ -5,16 +5,17 @@ using Microsoft.AspNetCore.Mvc;
 namespace BookShoppingCartMvcUI.Controllers;
 
 [Authorize(Roles = nameof(Roles.Admin))]
-public class AdminOperationController : Controller
+public class AdminOperationsController : Controller
 {
     private readonly IUserOrderRepository _userOrderRepository;
-    public AdminOperationController(IUserOrderRepository userOrderRepository)
+    public AdminOperationsController(IUserOrderRepository userOrderRepository)
     {
         _userOrderRepository = userOrderRepository;
     }
     public async Task<IActionResult> AllOrders()
     {
         var orders = await _userOrderRepository.UserOrders(true);
-        return Ok(orders);
+        return View(orders);
     }
 }
+

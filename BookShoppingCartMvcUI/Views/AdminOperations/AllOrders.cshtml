@@ -14,6 +14,8 @@
                 <th>Address</th>
                 <th>PaymentStatus</th>
                 <th>OrderStatus</th>
+                <th>Actions</th>
+
             </tr>
             @foreach (var order in Model)
             {
@@ -21,10 +23,25 @@
                     <td>@order.CreateDate.ToString("dd-MM-yyyy")</td>
                     <td>@order.Name</td>
                     <td>@order.MobileNumber</td>
+                    <td>@order.Email</td>
                     <td>@order.Address</td>
                     <td>@order.PaymentMethod | @(order.IsPaid?"Paid":"Not Paid")</td>
                     <td>@order.OrderStatus.StatusName</td>
+                    <td>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-@order.Id">
+                            Order-Detail
+                        </button>
+                        <a href="" class="btn btn-info">Change Order Status</a>
+                        <a href="" class="btn btn-info">Change PaymentStus</a>
+                        
+                    @await Html.PartialAsync("/Views/AdminOperations/_OrderDetailModal.cshtml", new OrderDetailModalDTO { DivId = order.Id.ToString(), OrderDetail = order.OrderDetail })
+                    </td>
+
                 </tr>
+               
+               
+                    
+
             }
         </table>
 
@@ -33,7 +50,13 @@
     {
         <h5>No orders</h5>
     }
+
+
 </div>
+
+
+
+
 
 
 
