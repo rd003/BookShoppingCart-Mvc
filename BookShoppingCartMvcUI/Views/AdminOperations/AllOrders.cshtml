@@ -31,8 +31,8 @@
                         <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#modal-@order.Id">
                             Order-Detail
                         </button>
-                        <a href="" class="btn btn-info">Change Order Status</a>
-                        <a href="" class="btn btn-info">Change PaymentStus</a>
+                        <a asp-action="UpdatePaymentStatus" asp-route-orderId="@order.Id" class="btn btn-info">Change Order Status</a>
+                        <a asp-action="TogglePaymentStatus" asp-route-orderId="@order.Id" class="btn btn-info">Toggle Payment Status</a>
                         
                     @await Html.PartialAsync("/Views/AdminOperations/_OrderDetailModal.cshtml", new OrderDetailModalDTO { DivId = order.Id.ToString(), OrderDetail = order.OrderDetail })
                     </td>
