@@ -29,11 +29,15 @@
                     <td>@order.PaymentMethod | @(order.IsPaid ? "Paid" : "Not Paid")</td>
                     <td>@order.OrderStatus.StatusName</td>
                     <td>
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#modal-@order.Id" class="btn btn-primary">
                             Order-Detail
                         </button>
                         <a asp-action="UpdatePaymentStatus" asp-route-orderId="@order.Id" class="btn btn-info">Change Order Status</a>
                         <a asp-action="TogglePaymentStatus" asp-route-orderId="@order.Id" class="btn btn-info">Toggle Payment Status</a>
+
+                   @* appending modal div here *@
+                   @* Make sure to put this partial tag inside this td block, otherwise it can cause layout related problem*@
+                   @await Html.PartialAsync("/Views/AdminOperations/_OrderDetailModal.cshtml",new OrderDetailModalDTO{DivId=order.Id.ToString(), OrderDetail=order.OrderDetail})
                     </td>
 
                 </tr>
