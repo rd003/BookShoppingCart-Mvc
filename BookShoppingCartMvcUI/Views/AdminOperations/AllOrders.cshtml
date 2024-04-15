@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Order>
+@{
+    ViewData["Title"] = "AllOrders";
+}
+<div style="width:100%" class="mt-2">
+    <h4> Orders</h4>
+    @if (Model != null && Model.Count() > 0)
+    {
+        <table class="table table-striped">
+            <tr>
+                <th>OrderDate</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>MobileNo</th>
+                <th>Address</th>
+                <th>PaymentStatus</th>
+                <th>OrderStatus</th>
+                <th>Actions</th>
+
+            </tr>
+            @foreach (var order in Model)
+            {
+                <tr>
+                    <td>@order.CreateDate.ToString("dd-MM-yyyy")</td>
+                    <td>@order.Name</td>
+                    <td>@order.MobileNumber</td>
+                    <td>@order.Email</td>
+                    <td>@order.Address</td>
+                    <td>@order.PaymentMethod | @(order.IsPaid ? "Paid" : "Not Paid")</td>
+                    <td>@order.OrderStatus.StatusName</td>
+                    <td>
+                        <button type="button" data-bs-toggle="modal" data-bs-target="#modal-@order.Id" class="btn btn-primary">
+                            Order-Detail
+                        </button>
+                        <a asp-action="UpdateOrderStatus" asp-route-orderId="@order.Id" class="btn btn-info">Change Order Status</a>
+                        <a asp-action="TogglePaymentStatus" asp-route-orderId="@order.Id" class="btn btn-info">Toggle Payment Status</a>
+
+                   @* appending modal div here *@
+                   @* Make sure to put this partial tag inside this td block, otherwise it can cause layout related problem*@
+                   @await Html.PartialAsync("/Views/AdminOperations/_OrderDetailModal.cshtml",new OrderDetailModalDTO{DivId=order.Id.ToString(), OrderDetail=order.OrderDetail})
+                    </td>
+
+                </tr>
+
+            }
+        </table>
+
+    }
+    else
+    {
+        <h5>No orders</h5>
+    }
+
+
+</div>
+
