@@ -1,0 +1,24 @@
+@model IEnumerable<StockDisplayModel>
+@{
+
+}
+
+<h2>Stocks</h2>
+
+<table class="table table-bordered">
+  <tr>
+    <th>Book</th>
+    <th>Stock</th>
+    <th>Actions</th>
+  </tr>
+  @foreach(var item in Model)
+  {
+    <tr>
+      <td>@item.BookName</td>
+      <td>@item.Quantity</td>
+      <td>
+         <a asp-action="" asp-controller="Stock" asp-route-id="@item.BookId" class="btn btn-info"> Update Stock</a>
+      </td>
+    </tr>
+  }
+</table>

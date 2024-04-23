@@ -5,13 +5,20 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookShoppingCartMvcUI.Repositories
 {
-    public class StockRepository
+    public class StockRepository : IStockRepository
     {
         private readonly ApplicationDbContext _context;
 
         public StockRepository(ApplicationDbContext context)
         {
             _context = context;
+        }
+
+        public async Task AddStock(int bookId, int quantity)
+        {
+            throw new NotImplementedException();
+            // _context.Stocks.Add(stock);
+            // await _context.SaveChangesAsync();
         }
 
         public async Task<Stock?> GetStockById(int id)
@@ -36,5 +43,12 @@ namespace BookShoppingCartMvcUI.Repositories
             return stocks;
         }
 
+    }
+
+    public interface IStockRepository
+    {
+        Task<Stock?> GetStockById(int id);
+        Task<IEnumerable<StockDisplayModel>> GetStocks();
+        Task AddStock(int bookId, int quantity);
     }
 }
