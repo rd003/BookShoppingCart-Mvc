@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookShoppingCartMvcUI.Repositories
 {
-    public class StockRepository: IStockRepository
+    public class StockRepository : IStockRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -39,17 +39,8 @@ namespace BookShoppingCartMvcUI.Repositories
 
         public async Task<IEnumerable<StockDisplayModel>> GetStocks()
         {
-            var stocks = await (from stock in _context.Stocks
-                                join book in _context.Books
-                                on stock.BookId equals book.Id
-                                select new StockDisplayModel
-                                {
-                                    Id = stock.Id,
-                                    BookId = stock.BookId,
-                                    Quantity = stock.Quantity,
-                                    BookName = book.BookName
-                                }).ToListAsync();
-            return stocks;
+            // It is temperory, we will define it's logic later.
+            return await Task.FromResult(Enumerable.Empty<StockDisplayModel>());
         }
 
     }
