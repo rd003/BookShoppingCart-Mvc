@@ -21,6 +21,8 @@ namespace BookShoppingCartMvcUI.Models
         [Required]
         public int GenreId { get; set; }
         public Genre Genre { get; set; }
+        //navigation property
+        public Stock Stock { get; set; }
         public List<OrderDetail> OrderDetail { get; set; }
         public List<CartDetail> CartDetail { get; set; }
 
