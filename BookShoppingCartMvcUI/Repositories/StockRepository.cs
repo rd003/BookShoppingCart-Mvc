@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace BookShoppingCartMvcUI.Repositories
 {
-    public class StockRepository : IStockRepository
+    public class StockRepository
     {
         private readonly ApplicationDbContext _context;
 
@@ -14,33 +14,26 @@ namespace BookShoppingCartMvcUI.Repositories
             _context = context;
         }
 
-        public async Task AddStock(Stock stock)
-        {
-            _context.Stocks.Add(stock);
-            await _context.SaveChangesAsync();
-        }
-
-        public async Task UpdateStock(Stock stock)
-        {
-            _context.Stocks.Update(stock);
-            await _context.SaveChangesAsync();
-        }
-
         public async Task<Stock?> GetStockById(int id)
         {
             return await _context.Stocks.FindAsync(id);
         }
 
-        public async Task DeleteStock(Stock stock)
-        {
-            _context.Stocks.Remove(stock);
-            await _context.SaveChangesAsync();
-        }
-
         public async Task<IEnumerable<StockDisplayModel>> GetStocks()
         {
-            // It is temperory, we will define it's logic later.
-            return await Task.FromResult(Enumerable.Empty<StockDisplayModel>());
+            var stocks = await (from book in _context.Books
+                                join stock in _context.Stocks
+                                on book.Id equals stock.BookId
+                                into book_stock
+                                from bookStock in book_stock.DefaultIfEmpty()
+                                select new StockDisplayModel
+                                {
+                                    BookId = book.Id,
+                                    BookName = book.BookName,
+                                    Quantity = bookStock == null ? 0 : bookStock.Quantity
+                                }
+                                ).ToListAsync();
+            return stocks;
         }
 
     }
