@@ -1,6 +1,8 @@
 ﻿//using BookShoppingCartMvcUI.Models.DTOs;
 //using Microsoft.AspNetCore.Http.HttpResults;
 
+using Microsoft.EntityFrameworkCore;
+
 namespace BookShoppingCartMvcUI.Repositories
 {
     public class StockRepository: IStockRepository
@@ -37,8 +39,17 @@ namespace BookShoppingCartMvcUI.Repositories
 
         public async Task<IEnumerable<StockDisplayModel>> GetStocks()
         {
-            // It is temperory, we will define it's logic later
-            return await Task.FromResult(Enumerable.Empty<StockDisplayModel>());
+            var stocks = await (from stock in _context.Stocks
+                                join book in _context.Books
+                                on stock.BookId equals book.Id
+                                select new StockDisplayModel
+                                {
+                                    Id = stock.Id,
+                                    BookId = stock.BookId,
+                                    Quantity = stock.Quantity,
+                                    BookName = book.BookName
+                                }).ToListAsync();
+            return stocks;
         }
 
     }
