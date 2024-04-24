@@ -21,12 +21,12 @@ public class StockController : Controller
 
     public IActionResult ManangeStock(int bookId)
     {
-        var stock = new Stock { BookId = bookId };
+        var stock = new StockDTO { BookId = bookId };
         return View(stock);
     }
 
     [HttpPost]
-    public async Task<IActionResult> ManangeStock(Stock stock)
+    public async Task<IActionResult> ManangeStock(StockDTO stock)
     {
         if (!ModelState.IsValid)
             return View(stock);

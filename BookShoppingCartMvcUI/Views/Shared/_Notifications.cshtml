@@ -1,4 +1,4 @@
-@If(TempData["successMessage"] is not null)
+@if(TempData["successMessage"] is not null)
 {
 <div class="alert alert-success alert-dismissible fade show" role="alert">
   @TempData["successMessage"]
@@ -8,7 +8,7 @@
 </div>
 }
 
-@If(TempData["errorMessage"] is not null)
+@if(TempData["errorMessage"] is not null)
 {
 <div class="alert alert-danger alert-dismissible fade show" role="alert">
   @TempData["errorMessage"]

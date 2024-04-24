@@ -1,10 +1,11 @@
-@model Stock
+@model StockDTO
 @{
 
 }
 
+@Html.ValidationSummary()
 <h2> Manage Stock </h2>
-<a asp-action="Index" asp-controller="Stock" class="btn btn-primary"/>
+<a asp-action="Index" asp-controller="Stock" class="btn btn-primary">Back</a>
 <form asp-action="ManangeStock">
    <input type="hidden" asp-for="BookId" />
 
