@@ -4,7 +4,7 @@
 }
 
 <h2>Stocks</h2>
-
+<partial name="_Notifications" />
 <table class="table table-bordered">
   <tr>
     <th>Book</th>
@@ -17,7 +17,7 @@
       <td>@item.BookName</td>
       <td>@item.Quantity</td>
       <td>
-         <a asp-action="" asp-controller="Stock" asp-route-id="@item.BookId" class="btn btn-info"> Update Stock</a>
+         <a asp-action="ManangeStock" asp-controller="Stock" asp-route-bookId="@item.BookId" class="btn btn-info"> Update Stock</a>
       </td>
     </tr>
   }

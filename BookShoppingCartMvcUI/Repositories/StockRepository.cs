@@ -14,11 +14,21 @@ namespace BookShoppingCartMvcUI.Repositories
             _context = context;
         }
 
-        public async Task AddStock(int bookId, int quantity)
+        public async Task ManageStock(int bookId, int quantity)
         {
-            throw new NotImplementedException();
-            // _context.Stocks.Add(stock);
-            // await _context.SaveChangesAsync();
+            // if there is no stock for given book id, then add new record
+            // if there is already stock for given book id, update stock's quantity
+            var existingStock = await GetStockById(bookId);
+            if (existingStock is null)
+            {
+                var stock = new Stock { BookId = bookId, Quantity = quantity };
+                _context.Stocks.Add(stock);
+            }
+            else
+            {
+                existingStock.Quantity = quantity;
+            }
+            await _context.SaveChangesAsync();
         }
 
         public async Task<Stock?> GetStockById(int id)
@@ -49,6 +59,6 @@ namespace BookShoppingCartMvcUI.Repositories
     {
         Task<Stock?> GetStockById(int id);
         Task<IEnumerable<StockDisplayModel>> GetStocks();
-        Task AddStock(int bookId, int quantity);
+        Task ManageStock(int bookId, int quantity);
     }
 }
