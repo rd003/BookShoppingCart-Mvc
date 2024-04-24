@@ -13,15 +13,17 @@ public class StockController : Controller
         _stockRepo = stockRepo;
     }
 
-    public async Task<IActionResult> Index(string sTerm="")
+    public async Task<IActionResult> Index(string sTerm = "")
     {
         var stocks = await _stockRepo.GetStocks(sTerm);
         return View(stocks);
     }
 
-    public IActionResult ManangeStock(int bookId)
+    public async Task<IActionResult> ManangeStock(int bookId)
     {
-        var stock = new StockDTO { BookId = bookId };
+        var existingStock = await _stockRepo.GetStockByBookId(bookId);
+        var stock = new StockDTO { BookId = bookId,Quantity= existingStock!=null
+        ? existingStock.Quantity:0};
         return View(stock);
     }
 
@@ -32,7 +34,7 @@ public class StockController : Controller
             return View(stock);
         try
         {
-            await _stockRepo.ManageStock(stock.BookId, stock.Quantity);
+            await _stockRepo.ManageStock(stock);
             TempData["successMessage"] = "Stock is updated successfully.";
         }
         catch (Exception ex)
