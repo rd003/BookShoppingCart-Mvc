@@ -36,13 +36,14 @@ namespace BookShoppingCartMvcUI.Repositories
             return await _context.Stocks.FindAsync(id);
         }
 
-        public async Task<IEnumerable<StockDisplayModel>> GetStocks()
+        public async Task<IEnumerable<StockDisplayModel>> GetStocks(string sTerm="")
         {
             var stocks = await (from book in _context.Books
                                 join stock in _context.Stocks
                                 on book.Id equals stock.BookId
                                 into book_stock
                                 from bookStock in book_stock.DefaultIfEmpty()
+                                where string.IsNullOrWhiteSpace(sTerm) ||            book.BookName.ToLower().Contains(sTerm.ToLower())
                                 select new StockDisplayModel
                                 {
                                     BookId = book.Id,
@@ -58,7 +59,7 @@ namespace BookShoppingCartMvcUI.Repositories
     public interface IStockRepository
     {
         Task<Stock?> GetStockById(int id);
-        Task<IEnumerable<StockDisplayModel>> GetStocks();
+        Task<IEnumerable<StockDisplayModel>> GetStocks(string sTerm="");
         Task ManageStock(int bookId, int quantity);
     }
 }

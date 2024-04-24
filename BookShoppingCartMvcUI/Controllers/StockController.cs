@@ -13,9 +13,9 @@ public class StockController : Controller
         _stockRepo = stockRepo;
     }
 
-    public async Task<IActionResult> Index()
+    public async Task<IActionResult> Index(string sTerm="")
     {
-        var stocks = await _stockRepo.GetStocks();
+        var stocks = await _stockRepo.GetStocks(sTerm);
         return View(stocks);
     }
 
