@@ -27,6 +27,9 @@ namespace BookShoppingCartMvcUI.Models
 
         [NotMapped]
         public string GenreName { get; set; }
+        [NotMapped]
+        public int Quantity { get; set; }
+
 
     }
 }
