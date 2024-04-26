@@ -102,6 +102,9 @@ namespace BookShoppingCartMvcUI.Repositories
             var shoppingCart = await _db.ShoppingCarts
                                   .Include(a => a.CartDetails)
                                   .ThenInclude(a => a.Book)
+                                  .ThenInclude(a => a.Stock)
+                                  .Include(a => a.CartDetails)
+                                  .ThenInclude(a => a.Book)
                                   .ThenInclude(a => a.Genre)
                                   .Where(a => a.UserId == userId).FirstOrDefaultAsync();
             return shoppingCart;
