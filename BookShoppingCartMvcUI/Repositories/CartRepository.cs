@@ -164,7 +164,7 @@ namespace BookShoppingCartMvcUI.Repositories
                     OrderStatusId = pendingRecord.Id
                 };
                 _db.Orders.Add(order);
-                //_db.SaveChanges();
+                _db.SaveChanges();
                 foreach(var item in cartDetail)
                 {
                     var orderDetail = new OrderDetail
