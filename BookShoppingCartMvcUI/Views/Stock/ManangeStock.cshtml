@@ -1,0 +1,22 @@
+﻿@model StockDTO
+@{
+    
+}
+
+<div style="width:50%">
+<h2> Manage Stock </h2>
+<a asp-action="Index" asp-controller="Stock" class="btn btn-primary">Back</a>
+<form asp-action="ManangeStock">
+   <input type="hidden" asp-for="BookId" />
+
+   <div class="my-2">
+      <label>Quantity</label>
+      <input type="number" class="form-control" asp-for="Quantity" />
+      <span asp-validation-for="Quantity" class="text-danger"></span>
+   </div>
+
+   <div class="my-2">
+      <button type="submit" class="btn btn-info">Update</button>
+   </div>
+</form>
+</div>

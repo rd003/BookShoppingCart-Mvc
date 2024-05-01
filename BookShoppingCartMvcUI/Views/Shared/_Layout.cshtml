@@ -29,6 +29,9 @@
                     {
                     <li class="nav-item">
                         <a class="nav-link" href="/AdminOperations/AllOrders">Orders</a>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/Stock/Index">Stock</a>
+                        </li>
                     </li>
                     }
                     
@@ -49,6 +52,9 @@
         </div>
     </nav>
     <div class="container">
+        <div class="my-2">
+            <partial name="_Notifications" />
+        </div>
         @RenderBody()
     </div>
 </body>
