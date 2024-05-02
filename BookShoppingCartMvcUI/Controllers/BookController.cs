@@ -72,6 +72,7 @@ namespace BookShoppingCartMvcUI.Controllers
                     Price = bookToAdd.Price
                 };
                 await _bookRepo.AddBook(book);
+                TempData["successMessage"] = "Book is added successfully";
                 return RedirectToAction(nameof(AddBook));
             }
             catch (InvalidOperationException ex)

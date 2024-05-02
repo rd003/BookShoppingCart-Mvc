@@ -12,6 +12,7 @@
         <tr>
             <th>Image</th>
             <th>Book</th>
+            <th>Author</th>
             <th>Genre</th>
             <th>Price</th>
             <th>Action</th>
@@ -27,10 +28,11 @@
                     }
                     else
                     {
-                        <img src="/Resources/@book.Image" style="width:80px;height:100px" alt="book image" />
+                        <img src="/images/@book.Image" style="width:80px;height:100px" alt="book image" />
                     }
                 </td>
                 <td>@book.BookName</td>
+                <td>@book.AuthorName</td>
                 <td>@book.Genre.GenreName</td>
                 <td>@book.Price</td>
                 <td>
