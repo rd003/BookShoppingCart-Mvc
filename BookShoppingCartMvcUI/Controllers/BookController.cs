@@ -27,7 +27,6 @@ namespace BookShoppingCartMvcUI.Controllers
 
         public async Task<IActionResult> AddBook()
         {
-            // TODO: What if this throws error
             var genreSelectList = (await _genreRepo.GetGenres()).Select(genre => new SelectListItem
             {
                 Text = genre.GenreName,
@@ -40,7 +39,6 @@ namespace BookShoppingCartMvcUI.Controllers
         [HttpPost]
         public async Task<IActionResult> AddBook(BookDTO bookToAdd)
         {
-            // TODO: What if this throws error
             var genreSelectList = (await _genreRepo.GetGenres()).Select(genre => new SelectListItem
             {
                 Text = genre.GenreName,
