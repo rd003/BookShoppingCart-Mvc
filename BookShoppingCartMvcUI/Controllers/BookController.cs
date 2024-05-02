@@ -97,7 +97,7 @@ public class BookController : Controller
         var book = await _bookRepo.GetBookById(id);
         if(book==null)
         {
-            TempData["successMessage"] = $"Book with the id: {id} does not found";
+            TempData["errorMessage"] = $"Book with the id: {id} does not found";
             return RedirectToAction(nameof(Index));
         }
         var genreSelectList = (await _genreRepo.GetGenres()).Select(genre => new SelectListItem
@@ -189,12 +189,16 @@ public class BookController : Controller
         {
             var book = await _bookRepo.GetBookById(id);
             if (book == null)
-                TempData["successMessage"] = $"Book with the id: {id} does not found";
+            {
+                TempData["errorMessage"] = $"Book with the id: {id} does not found";
+            }
             else
             {
                 await _bookRepo.DeleteBook(book);
-                if(!string.IsNullOrWhiteSpace(book.Image))
+                if (!string.IsNullOrWhiteSpace(book.Image))
+                {
                     _fileService.DeleteFile(book.Image);
+                }
             }
         }
         catch (InvalidOperationException ex)
