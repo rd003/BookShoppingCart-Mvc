@@ -3,10 +3,11 @@
 
 }
 <div style="width:50%">
-    <h2> Add Book </h2>
+    <h2> Update Book </h2>
     <a asp-action="Index" asp-controller="Book" class="btn btn-primary">Back</a>
-    <form asp-action="AddBook" enctype="multipart/form-data">
-        @* <input type="hidden" asp-for="Id" /> *@
+    <form asp-action="UpdateBook" enctype="multipart/form-data">
+        <input type="hidden" asp-for="Id" />
+        <input type="hidden" asp-for="Image" />
 
         <div class="my-2">
             <label>Book*</label>
@@ -36,11 +37,15 @@
 
         <div class="my-2">
             <label>Image</label>
+            @if(!string.IsNullOrEmpty(Model.Image))
+            {
+                <img src="/images/@Model.Image" style="width:100px;height:80px"/>
+            }
             <input type="file" class="form-control" asp-for="ImageFile" />
         </div>
 
         <div class="my-2">
-            <button type="submit" class="btn btn-info">Add</button>
+            <button type="submit" class="btn btn-info">Update</button>
         </div>
     </form>
 </div>
