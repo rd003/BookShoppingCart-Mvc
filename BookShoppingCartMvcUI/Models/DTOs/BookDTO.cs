@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Microsoft.AspNetCore.Mvc.Rendering;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookShoppingCartMvcUI.Models.DTOs;
 public class BookDTO
@@ -17,4 +18,6 @@ public class BookDTO
     public string? Image { get; set; }
     [Required]
     public int GenreId { get; set; }
+    public IFormFile? ImageFile { get; set; }
+    public IEnumerable<SelectListItem>? GenreList { get; set; }
 }

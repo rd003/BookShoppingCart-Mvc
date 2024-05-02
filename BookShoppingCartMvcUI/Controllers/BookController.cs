@@ -1,5 +1,7 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using BookShoppingCartMvcUI.Shared;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace BookShoppingCartMvcUI.Controllers
 {
@@ -7,88 +9,88 @@ namespace BookShoppingCartMvcUI.Controllers
     public class BookController : Controller
     {
         private readonly IBookRepository _bookRepo;
+        private readonly IGenreRepository _genreRepo;
+        private readonly IFileService _fileService;
 
-        public BookController(IBookRepository bookRepo)
+        public BookController(IBookRepository bookRepo, IGenreRepository genreRepo, IFileService fileService)
         {
             _bookRepo = bookRepo;
+            _genreRepo = genreRepo;
+            _fileService = fileService;
         }
 
         public async Task<IActionResult> Index()
         {
-            var genres = await _genreRepo.GetGenres();
-            return View(genres);
+            var books = await _bookRepo.GetBooks();
+            return View(books);
         }
 
-        public IActionResult AddGenre()
+        public async Task<IActionResult> AddBook()
         {
-            return View();
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> AddGenre(GenreDTO genre)
-        {
-            if(!ModelState.IsValid)
+            // TODO: What if this throws error
+            var genreSelectList = (await _genreRepo.GetGenres()).Select(genre => new SelectListItem
             {
-                return View(genre);
-            }
-            try
-            {
-                var genreToAdd = new Genre { GenreName = genre.GenreName, Id = genre.Id };
-                await _genreRepo.AddGenre(genreToAdd);
-                TempData["successMessage"] = "Genre added successfully";
-                return RedirectToAction(nameof(AddGenre));
-            }
-            catch(Exception ex)
-            {
-                TempData["errorMessage"] = "Genre could not added!";
-                return View(genre);
-            }
-
-        }
-
-        public async Task<IActionResult> UpdateGenre(int id)
-        {
-            var genre = await _genreRepo.GetGenreById(id);
-            if (genre is null)
-                throw new InvalidOperationException($"Genre with id: {id} does not found");
-            var genreToUpdate = new GenreDTO
-            {
-                Id = genre.Id,
-                GenreName = genre.GenreName
-            };
-            return View(genreToUpdate);
+                Text = genre.GenreName,
+                Value = genre.Id.ToString(),
+            });
+            BookDTO bookToAdd = new() { GenreList = genreSelectList };
+            return View(bookToAdd);
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateGenre(GenreDTO genreToUpdate)
+        public async Task<IActionResult> AddBook(BookDTO bookToAdd)
         {
+            // TODO: What if this throws error
+            var genreSelectList = (await _genreRepo.GetGenres()).Select(genre => new SelectListItem
+            {
+                Text = genre.GenreName,
+                Value = genre.Id.ToString(),
+            });
+            bookToAdd.GenreList = genreSelectList;
+
             if (!ModelState.IsValid)
-            {
-                return View(genreToUpdate);
-            }
+                return View(bookToAdd);
+
             try
             {
-                var genre = new Genre { GenreName = genreToUpdate.GenreName, Id = genreToUpdate.Id };
-                await _genreRepo.UpdateGenre(genre);
-                TempData["successMessage"] = "Genre is updated successfully";
-                return RedirectToAction(nameof(Index));
+                if (bookToAdd.ImageFile != null)
+                {
+                    if(bookToAdd.ImageFile.Length> 1 * 1024 * 1024)
+                    {
+                        throw new InvalidOperationException("Image file can not exceed 1 MB");
+                    }
+                    string[] allowedExtensions = [".jpeg",".jpg",".png"];
+                    string imageName=await _fileService.SaveFile(bookToAdd.ImageFile, allowedExtensions);
+                    bookToAdd.Image = imageName;
+                }
+                // manual mapping of BookDTO -> Book
+                Book book = new()
+                {
+                    Id = bookToAdd.Id,
+                    BookName = bookToAdd.BookName,
+                    AuthorName = bookToAdd.AuthorName,
+                    Image = bookToAdd.Image,
+                    GenreId = bookToAdd.GenreId,
+                    Price = bookToAdd.Price
+                };
+                await _bookRepo.AddBook(book);
+                return RedirectToAction(nameof(AddBook));
+            }
+            catch (InvalidOperationException ex)
+            {
+                TempData["errorMessage"]= ex.Message;
+                return View(bookToAdd);
+            }
+            catch (FileNotFoundException ex)
+            {
+                TempData["errorMessage"] = ex.Message;
+                return View(bookToAdd);
             }
             catch (Exception ex)
             {
-                TempData["errorMessage"] = "Genre could not updated!";
-                return View(genreToUpdate);
+                TempData["errorMessage"] = "Error on saving data";
+                return View(bookToAdd);
             }
-
-        }
-
-        public async Task<IActionResult> DeleteGenre(int id)
-        {
-            var genre = await _genreRepo.GetGenreById(id);
-            if (genre is null)
-                throw new InvalidOperationException($"Genre with id: {id} does not found");
-            await _genreRepo.DeleteGenre(genre);
-            return RedirectToAction(nameof(Index));
-
         }
 
     }

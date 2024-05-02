@@ -16,7 +16,7 @@ public class FileService : IFileService
 
     public async Task<string> SaveFile(IFormFile file, string[] allowedExtensions)
     {
-        var wwwPath = this._environment.WebRootPath;
+        var wwwPath = _environment.WebRootPath;
         var path = Path.Combine(wwwPath, "Resources");
         if (!Directory.Exists(path))
         {
