@@ -1,5 +1,4 @@
-﻿using BookShoppingCartMvcUI.Models;
-using BookShoppingCartMvcUI.Shared;
+﻿using BookShoppingCartMvcUI.Shared;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -151,6 +150,7 @@ public class BookController : Controller
             // manual mapping of BookDTO -> Book
             Book book = new()
             {
+                Id=bookToUpdate.Id,
                 BookName = bookToUpdate.BookName,
                 AuthorName = bookToUpdate.AuthorName,
                 GenreId = bookToUpdate.GenreId,
@@ -193,7 +193,8 @@ public class BookController : Controller
             else
             {
                 await _bookRepo.DeleteBook(book);
-                _fileService.DeleteFile(book.Image);
+                if(!string.IsNullOrWhiteSpace(book.Image))
+                    _fileService.DeleteFile(book.Image);
             }
         }
         catch (InvalidOperationException ex)
