@@ -12,11 +12,8 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
    - MS SQL (Database)
    - Entity Framework Core (ORM)
    - Bootstrap (frontend)
-#### Note ⚠️
-There is **no admin panel** for adding the products. Since I've already built multiple tutorials on CRUD related projects, so I do not want to waste the time to create the data entry system. I have directly added data to the database. [Needed data is provided in scripts in this doc](https://github.com/rd003/BookShoppingCart-Mvc/blob/master/README.md#data-entry-).
-If you are new to .net then I will recommend you to follow the full playlist of this project to understand the working.
 
-#### Video tutorial 📺
+## Video tutorial 📺
    [Youtube playlist](https://www.youtube.com/watch?v=R4ZLWD89R5w&list=PLP8UhDwXI7f_8r2Rbt7GNwf7eXZqUu_p4)
 
 ## How to run the project? 🌐
@@ -66,11 +63,10 @@ I am assuming that, you have already installed **Visual Studio 2022** (It is the
 
 ## Data Entry 📈📉
 
-Well, you can't do it from admin panel. You have to do it manually. You have to enter data directly in the database. You need to enter values in three tables. 
- 
- - Genre
- - Book
- - OrderStatus (Contain Constants)
+I have provided some data of these 3 tables to test the application. 
+ - Genre (You can also add it from the admin panel)
+ - Book (You can also add it from the admin panel)
+ - OrderStatus (Contain Constants) (Can not enter OrderStatus from the Admin panel)
  
 Please, run these scripts in a order. Genre data must be added before book.
  
