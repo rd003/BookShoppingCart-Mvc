@@ -1,0 +1,46 @@
+﻿@model BookDTO
+@{
+
+}
+<div style="width:50%">
+    <h2> Add Book </h2>
+    <a asp-action="Index" asp-controller="Book" class="btn btn-primary">Back</a>
+    <form asp-action="AddBook" enctype="multipart/form-data">
+        @* <input type="hidden" asp-for="Id" /> *@
+
+        <div class="my-2">
+            <label>Book*</label>
+            <input type="text" class="form-control" asp-for="BookName" />
+            <span asp-validation-for="BookName" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Author*</label>
+            <input type="text" class="form-control" asp-for="AuthorName" />
+            <span asp-validation-for="AuthorName" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Genre*</label>
+            <select class="form-control" asp-for="GenreId" asp-items="Model.GenreList">
+                <option value="">Select Genre</option>
+            </select>
+            <span asp-validation-for="GenreId" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Price*</label>
+            <input type="number" class="form-control" asp-for="Price" />
+            <span asp-validation-for="Price" class="text-danger"></span>
+        </div>
+
+        <div class="my-2">
+            <label>Image</label>
+            <input type="file" class="form-control" asp-for="ImageFile" />
+        </div>
+
+        <div class="my-2">
+            <button type="submit" class="btn btn-info">Add</button>
+        </div>
+    </form>
+</div>
