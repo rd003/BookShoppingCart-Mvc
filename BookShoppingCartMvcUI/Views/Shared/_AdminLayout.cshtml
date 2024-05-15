@@ -22,31 +22,27 @@
   <body>
     <div class="main-contaier">
       <div class="sidenav">
-        <a class="navigation-link" href="#"
+        <a class="navigation-link" href="/Home/Index"
           ><i class="bi bi-house-door"></i> Home</a
         >
-        <a href="#" class="navigation-link"
-          ><i class="bi bi-receipt"></i> Orders</a
+            <a href="/AdminOperations/AllOrders" class="navigation-link"><i class="bi bi-receipt"></i> Orders</a
         >
-        <a href="#" class="navigation-link"
-          ><i class="bi bi-archive"></i> Stock</a
+            <a href="/Stock/Index" class="navigation-link"><i class="bi bi-archive"></i> Stock</a
         >
-        <a href="#" class="navigation-link"
-          ><i class="bi bi-collection"></i> Genre</a
+            <a href="/Genre/Index" class="navigation-link"><i class="bi bi-collection"></i> Genre</a
         >
-        <a href="#" class="navigation-link"><i class="bi bi-book"></i> Books</a>
+            <a href="/Book/Index" class="navigation-link"><i class="bi bi-book"></i> Books</a>
         <a href="#" class="navigation-link"
           ><i class="bi bi-bar-chart"></i> Top Salling Items</a
         >
       </div>
       <div class="right-panel">
         <nav class="nav-bar">
-          <div class="nav-heading">Welcome username</div>
+          <div class="nav-heading">Welcome @User.Identity?.Name</div>
           <div class="nav-actions">
-            <a href="#" class="navigation-link"
-              ><i class="bi bi-gear"></i> Manage account</a
+                    <a href="/Identity/Account/Manage/Index" class="navigation-link"><i class="bi bi-gear"></i> Manage account</a
             >
-            <form>
+                    <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
               <button type="submit" class="navigation-link">
                 <i class="bi bi-box-arrow-left"></i> Logout
               </button>
