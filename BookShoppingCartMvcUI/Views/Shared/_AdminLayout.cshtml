@@ -1,0 +1,67 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+      crossorigin="anonymous"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css"
+    />
+
+    <link href="~/BookShoppingCartMvcUI.styles.css" rel="stylesheet" />
+   
+  </head>
+  <body>
+    <div class="main-contaier">
+      <div class="sidenav">
+        <a class="navigation-link" href="#"
+          ><i class="bi bi-house-door"></i> Home</a
+        >
+        <a href="#" class="navigation-link"
+          ><i class="bi bi-receipt"></i> Orders</a
+        >
+        <a href="#" class="navigation-link"
+          ><i class="bi bi-archive"></i> Stock</a
+        >
+        <a href="#" class="navigation-link"
+          ><i class="bi bi-collection"></i> Genre</a
+        >
+        <a href="#" class="navigation-link"><i class="bi bi-book"></i> Books</a>
+        <a href="#" class="navigation-link"
+          ><i class="bi bi-bar-chart"></i> Top Salling Items</a
+        >
+      </div>
+      <div class="right-panel">
+        <nav class="nav-bar">
+          <div class="nav-heading">Welcome username</div>
+          <div class="nav-actions">
+            <a href="#" class="navigation-link"
+              ><i class="bi bi-gear"></i> Manage account</a
+            >
+            <form>
+              <button type="submit" class="navigation-link">
+                <i class="bi bi-box-arrow-left"></i> Logout
+              </button>
+            </form>
+          </div>
+        </nav>
+        <div class="content">
+            @RenderBody()
+        </div>
+      </div>
+    </div>
+  </body>
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"
+  ></script>
+</html>
