@@ -4,10 +4,10 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
 📢 Initially , this project was built with .net 7.  But it works fine with .net 6+ and now it is **Upgraded to .net 8.0.** I will try to keep it up to date.
 
 ## Tech stack 🧑‍💻
-   - Dotnet core mvc
-   - MS SQL (Database)
+   - Dotnet core mvc (.Net 8)
+   - MS SQLServer (Database)
    - Entity Framework Core (ORM)
-   - Bootstrap (frontend)
+   - Bootstrap 5 (frontend)
 
 ## Video tutorial 📺
    [Youtube playlist](https://www.youtube.com/watch?v=R4ZLWD89R5w&list=PLP8UhDwXI7f_8r2Rbt7GNwf7eXZqUu_p4)
