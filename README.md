@@ -3,10 +3,6 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
 
 📢 Initially , this project was built with .net 7.  But it works fine with .net 6+ and now it is **Upgraded to .net 8.0.** I will try to keep it up to date.
 
-## Screenshots
-
-![homepage](https://github.com/rd003/BookShoppingCart-Mvc/blob/master/screenshot1.jpg)
-
 ## Tech stack 🧑‍💻
    - Dotnet core mvc
    - MS SQL (Database)
@@ -44,7 +40,7 @@ I am assuming that, you have already installed **Visual Studio 2022** (It is the
 
 1. Open the `Program.cs` file , you will find these commented lines
    
-   ```
+   ```c#
      //using(var scope = app.Services.CreateScope())
      //{
      //    await DbSeeder.SeedDefaultData(scope.ServiceProvider);
@@ -64,14 +60,15 @@ I am assuming that, you have already installed **Visual Studio 2022** (It is the
 ## Data Entry 📈📉
 
 I have provided some data of these 3 tables to test the application. 
+**⚠️NOte: Data entry of Genre and Book is optional, you can do it from admin panel but you must enter some data for OrderStatus.**
  - Genre (You can also add it from the admin panel)
  - Book (You can also add it from the admin panel)
- - OrderStatus (Contain Constants) (Can not enter OrderStatus from the Admin panel)
+ - OrderStatus  (⚠️It Contain Constants. You Can not enter OrderStatus from the Admin panel. It must be added through sql server)
  
 Please, run these scripts in a order. Genre data must be added before book.
  
  #### Genre
- ```
+ ```sql
    USE [BookShoppingCartMvc]
    GO
    SET IDENTITY_INSERT [dbo].[Genre] ON 
@@ -94,7 +91,7 @@ Please, run these scripts in a order. Genre data must be added before book.
  ```
 
  #### Book
- ```
+ ```sql
    USE [BookShoppingCartMvc]
 
    INSERT INTO book (BookName, AuthorName, Price, GenreId)
@@ -154,7 +151,7 @@ Please, run these scripts in a order. Genre data must be added before book.
 
 ##### Order Status
 
-```
+```sql
    USE [BookShoppingCartMvc]
    GO
    SET IDENTITY_INSERT [dbo].[OrderStatus] ON 
@@ -176,8 +173,12 @@ Please, run these scripts in a order. Genre data must be added before book.
 
 ```
 
+## Screenshots
+
+![homepage](https://github.com/rd003/BookShoppingCart-Mvc/blob/master/screenshot1.jpg)
+
    
-#### I hope, you have learned something valuable from this work.
+#### Thanks
 
 If you find this repository useful, then consider to leave a ⭐.
 
