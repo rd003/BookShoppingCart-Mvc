@@ -173,6 +173,34 @@ Please, run these scripts in a order. Genre data must be added before book.
 
 ```
 
+## Other useful sql scripts
+
+You also need to add this stored procedure in your database.
+
+```sql
+create  procedure [dbo].[Usp_GetTopNSellingBooksByDate]
+@startDate datetime,@endDate datetime
+as
+begin
+
+SET NOCOUNT ON;
+
+with UnitSold as
+(
+select od.BookId, SUM(od.Quantity) as TotalUnitSold from [order] o 
+join OrderDetail od on o.Id = od.OrderId
+where o.IsPaid=1 and o.IsDeleted=0 and o.CreateDate between @startDate and @endDate
+group by od.BookId
+)
+
+select top 5 b.BookName,b.AuthorName,b.[Image],us.TotalUnitSold 
+from  UnitSold us
+join [Book] b
+on us.BookId = b.Id
+order by us.TotalUnitSold desc
+end
+```
+
 ## Screenshots
 
 ![homepage](https://github.com/rd003/BookShoppingCart-Mvc/blob/master/screenshot1.jpg)
