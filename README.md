@@ -7,6 +7,7 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
    - Dotnet core mvc (.Net 8)
    - MS SQLServer (Database)
    - Entity Framework Core (ORM)
+   - Identity Core (Authentication)
    - Bootstrap 5 (frontend)
 
 ## Video tutorial 📺
