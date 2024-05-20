@@ -1,0 +1,46 @@
+@model TopNSoldBooksVm
+
+<h3>Top selling books</h3>
+@if(Model!=null)
+{
+<div>
+ <form class="my-2 d-flex" style="gap:5px" asp-action="TopFiveSellingBooks" method="get">
+    <input type="date" style="width: 200px;" class="form-control" name="sDate"/>
+    <input type="date" style="width: 200px;" class="form-control"  name="eDate"/>
+    <button class="btn btn-primary">Filter</button>
+    <a class="btn btn-primary" href="/Reports/TopFiveSellingBooks">Clear</a>
+ </form>
+
+ <h4>Showing Results from @Model.StartDate.ToString("dd-MMM-yyyy") to @Model.EndDate.ToString("dd-MMM-yyyy")</h4>
+
+ @if(Model.TopNSoldBooks.Count()==0)
+ {
+     <div class="my-3" style="font-size:16px; font-weight:bold">
+        No records found
+     </div>
+ }
+ else
+ {
+ <table style="width: 50%;" class="table table-striped">
+  <thead>
+    <th>Book</th>
+    <th>Sold Units</th>
+  </thead>
+
+  <tbody>
+    @foreach (var item in Model.TopNSoldBooks)
+    {
+      <tr>
+       <td>@item.BookName by @item.AuthorName</td>
+       <td>@item.TotalUnitSold</td>
+      </tr>
+    }
+  </tbody>
+ </table>
+ }
+</div>
+}
+else
+{
+    <h4>Something went wrong</h4>
+}
