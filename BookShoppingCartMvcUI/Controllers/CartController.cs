@@ -31,13 +31,13 @@ namespace BookShoppingCartMvcUI.Controllers
             return View(cart);
         }
 
-        public  async Task<IActionResult> GetTotalItemInCart()
+        public async Task<IActionResult> GetTotalItemInCart()
         {
             int cartItem = await _cartRepo.GetCartItemCount();
             return Ok(cartItem);
         }
 
-        public  IActionResult Checkout()
+        public IActionResult Checkout()
         {
             return View();
         }
@@ -61,6 +61,20 @@ namespace BookShoppingCartMvcUI.Controllers
         public IActionResult OrderFailure()
         {
             return View();
+        }
+
+        public async Task<IActionResult> UpdateCartItem(int bookId, int qty)
+        {
+            try
+            {
+                await _cartRepo.UpdateCartQuantity(bookId, qty);
+            }
+            catch (Exception ex)
+            {
+                // log error here
+                TempData["errorMessage"] = "Error on updating cart item";
+            }
+            return RedirectToAction(nameof(GetUserCart));
         }
 
     }
