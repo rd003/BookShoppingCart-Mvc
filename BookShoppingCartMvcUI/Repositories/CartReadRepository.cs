@@ -19,11 +19,10 @@ public class CartReadRepository : ICartReadRepository
     }
 
 
-    public async Task<ShoppingCart> GetUserCart()
+    public async Task<ShoppingCart?> GetUserCart()
     {
         var userId = CartUtility.GetUserId(_httpContextAccessor, _userManager);
-        if (userId == null)
-            throw new InvalidOperationException("Invalid userid");
+        ValidateUser(userId);
         var shoppingCart = await _db.ShoppingCarts
                               .Include(a => a.CartDetails)
                               .ThenInclude(a => a.Book)
@@ -35,7 +34,16 @@ public class CartReadRepository : ICartReadRepository
         return shoppingCart;
 
     }
-    public async Task<ShoppingCart> GetCart(string userId)
+
+    private void ValidateUser(string userId)
+    {
+        if (userId == null)
+        {
+            throw new InvalidOperationException("Invalid userid");
+        }
+    }
+
+    public async Task<ShoppingCart?> GetCart(string userId)
     {
         var cart = await _db.ShoppingCarts.FirstOrDefaultAsync(x => x.UserId == userId);
         return cart;
@@ -43,7 +51,7 @@ public class CartReadRepository : ICartReadRepository
 
     public async Task<int> GetCartItemCount(string userId = "")
     {
-        if (string.IsNullOrEmpty(userId)) // updated line
+        if (string.IsNullOrWhiteSpace(userId)) // updated line
         {
             userId = CartUtility.GetUserId(_httpContextAccessor, _userManager);
         }

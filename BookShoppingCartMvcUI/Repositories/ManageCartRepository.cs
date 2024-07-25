@@ -102,7 +102,7 @@ public class ManageCartRepository : IManageCartRepository
 
     private void ValidateUser(string userId)
     {
-        if (string.IsNullOrEmpty(userId))
+        if (string.IsNullOrWhiteSpace(userId))
             throw new UnauthorizedAccessException("user is not logged-in");
     }
 
