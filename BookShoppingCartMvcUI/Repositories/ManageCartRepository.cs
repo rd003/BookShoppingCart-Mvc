@@ -45,7 +45,7 @@ public class ManageCartRepository : IManageCartRepository
         }
         catch (Exception ex)
         {
-            _logger.LogError(ex,ex.Message);
+            _logger.LogError(ex, ex.Message);
         }
         var cartItemCount = await _cartReadRepository.GetCartItemCount(userId);
         return cartItemCount;
@@ -106,7 +106,7 @@ public class ManageCartRepository : IManageCartRepository
             throw new UnauthorizedAccessException("user is not logged-in");
     }
 
-    private CartDetail? GetCartItemByBookId(int cartId,int bookId)
+    private CartDetail? GetCartItemByBookId(int cartId, int bookId)
     {
         var cartItem = _db.CartDetails.AsNoTracking()
                              .FirstOrDefault(a => a.ShoppingCartId == cartId && a.BookId == bookId);
@@ -132,7 +132,7 @@ public class ManageCartRepository : IManageCartRepository
             {
                 throw new InvalidOperationException("Cart is empty");
             }
-             
+
             if (cartItem.Quantity == 1)
             {
                 _db.CartDetails.Remove(cartItem);
