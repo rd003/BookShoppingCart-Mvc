@@ -12,15 +12,15 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BookShoppingCartMvcUI.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240426055110_mig-stock-mgt")]
-    partial class migstockmgt
+    [Migration("20240724155701_mig20240724")]
+    partial class mig20240724
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "8.0.3")
+                .HasAnnotation("ProductVersion", "8.0.4")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);

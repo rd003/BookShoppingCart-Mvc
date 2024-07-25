@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace BookShoppingCartMvcUI.Migrations
 {
     /// <inheritdoc />
-    public partial class init : Migration
+    public partial class mig20240724 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -229,7 +229,13 @@ namespace BookShoppingCartMvcUI.Migrations
                     UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     CreateDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     OrderStatusId = table.Column<int>(type: "int", nullable: false),
-                    IsDeleted = table.Column<bool>(type: "bit", nullable: false)
+                    IsDeleted = table.Column<bool>(type: "bit", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    MobileNumber = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Address = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: false),
+                    PaymentMethod = table.Column<string>(type: "nvarchar(30)", maxLength: 30, nullable: false),
+                    IsPaid = table.Column<bool>(type: "bit", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -266,6 +272,26 @@ namespace BookShoppingCartMvcUI.Migrations
                         name: "FK_CartDetail_ShoppingCart_ShoppingCartId",
                         column: x => x.ShoppingCartId,
                         principalTable: "ShoppingCart",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Stock",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BookId = table.Column<int>(type: "int", nullable: false),
+                    Quantity = table.Column<int>(type: "int", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Stock", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Stock_Book_BookId",
+                        column: x => x.BookId,
+                        principalTable: "Book",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
@@ -366,6 +392,12 @@ namespace BookShoppingCartMvcUI.Migrations
                 name: "IX_OrderDetail_OrderId",
                 table: "OrderDetail",
                 column: "OrderId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Stock_BookId",
+                table: "Stock",
+                column: "BookId",
+                unique: true);
         }
 
         /// <inheritdoc />
@@ -393,6 +425,9 @@ namespace BookShoppingCartMvcUI.Migrations
                 name: "OrderDetail");
 
             migrationBuilder.DropTable(
+                name: "Stock");
+
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
@@ -402,16 +437,16 @@ namespace BookShoppingCartMvcUI.Migrations
                 name: "ShoppingCart");
 
             migrationBuilder.DropTable(
-                name: "Book");
-
-            migrationBuilder.DropTable(
                 name: "Order");
 
             migrationBuilder.DropTable(
-                name: "Genre");
+                name: "Book");
 
             migrationBuilder.DropTable(
                 name: "OrderStatus");
+
+            migrationBuilder.DropTable(
+                name: "Genre");
         }
     }
 }

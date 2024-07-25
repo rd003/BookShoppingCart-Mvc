@@ -6,15 +6,19 @@ namespace BookShoppingCartMvcUI.Controllers
     [Authorize]
     public class CartController : Controller
     {
-        private readonly ICartRepository _cartRepo;
+        private readonly IManageCartRepository _manageCartRepo;
+        private readonly ICartReadRepository _cartReadRepo;
+        private readonly ICheckoutRepository _checkoutRepo;
 
-        public CartController(ICartRepository cartRepo)
+        public CartController(IManageCartRepository manageCartRepo, ICartReadRepository cartReadRepo, ICheckoutRepository checkoutRepo)
         {
-            _cartRepo = cartRepo;
+            _manageCartRepo = manageCartRepo;
+            _cartReadRepo = cartReadRepo;
+            _checkoutRepo = checkoutRepo;
         }
         public async Task<IActionResult> AddItem(int bookId, int qty = 1, int redirect = 0)
         {
-            var cartCount = await _cartRepo.AddItem(bookId, qty);
+            var cartCount = await _manageCartRepo.AddItem(bookId, qty);
             if (redirect == 0)
                 return Ok(cartCount);
             return RedirectToAction("GetUserCart");
@@ -22,22 +26,22 @@ namespace BookShoppingCartMvcUI.Controllers
 
         public async Task<IActionResult> RemoveItem(int bookId)
         {
-            var cartCount = await _cartRepo.RemoveItem(bookId);
+            await _manageCartRepo.RemoveItem(bookId);
             return RedirectToAction("GetUserCart");
         }
         public async Task<IActionResult> GetUserCart()
         {
-            var cart = await _cartRepo.GetUserCart();
+            var cart = await _cartReadRepo.GetUserCart();
             return View(cart);
         }
 
-        public  async Task<IActionResult> GetTotalItemInCart()
+        public async Task<IActionResult> GetTotalItemInCart()
         {
-            int cartItem = await _cartRepo.GetCartItemCount();
+            int cartItem = await _cartReadRepo.GetCartItemCount();
             return Ok(cartItem);
         }
 
-        public  IActionResult Checkout()
+        public IActionResult Checkout()
         {
             return View();
         }
@@ -47,7 +51,7 @@ namespace BookShoppingCartMvcUI.Controllers
         {
             if (!ModelState.IsValid)
                 return View(model);
-            bool isCheckedOut = await _cartRepo.DoCheckout(model);
+            bool isCheckedOut = await _checkoutRepo.DoCheckout(model);
             if (!isCheckedOut)
                 return RedirectToAction(nameof(OrderFailure));
             return RedirectToAction(nameof(OrderSuccess));
