@@ -45,5 +45,5 @@ public class GenreRepository : IGenreRepository
         return await _context.Genres.ToListAsync();
     }
 
-    
+
 }
