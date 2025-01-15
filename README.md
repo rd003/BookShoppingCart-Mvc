@@ -1,12 +1,12 @@
 # BookShoppingCartMvc (A basic e-comm system for beginners)📚🛒
 
-It is a source code of the youtube tutorial on [book shopping cart in .net core mvc](https://www.youtube.com/watch?v=R4ZLWD89R5w&list=PLP8UhDwXI7f_8r2Rbt7GNwf7eXZqUu_p4). I have tried to explain how shopping cart 🛒 works in dot net core mvc. A ⭐ in repository is highly appreciated, helps to promote my content.
+It is a source code of the youtube tutorial on [book shopping cart in .net core mvc](https://www.youtube.com/watch?v=R4ZLWD89R5w&list=PLP8UhDwXI7f_8r2Rbt7GNwf7eXZqUu_p4). Initially it was designed to explain how shopping cart 🛒 works in dot net core mvc. But now it has more features except payment gateway. A ⭐ in repository is highly appreciated, helps to promote my content.
 
-📢 Initially , this project was built with .net 7. But it works fine with .net 6+ and now it is **Upgraded to .net 8.0.** I will try to keep it up to date.
+📢 Initially , this project was built with .net 7. But it works fine with .net 6+ and now it is **Upgraded to .net 9.0.** I will try to keep it up to date.
 
 ## Tech stack 🧑‍💻
 
-   - Dotnet core mvc (.Net 8)
+   - Dotnet core mvc (.Net 9)
    - MS SQLServer (Database)
    - Entity Framework Core (ORM)
    - Identity Core (Authentication)
@@ -18,9 +18,9 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
 
 ## How to run the project?🌐
 
-I am assuming that, you have already installed **Visual Studio 2022** (It is the latest as of march,2024) and **MS SQL Server Management Studio** (I am using mssql server 2022 as of march,2024). Now, follow the following steps.
+I am assuming that, you already have installed **Visual Studio 2022** (It is the latest as of january,2025) (or you can use `Rider` or `vs code`) and **MS SQL Server Management Studio** (I am using mssql server 2022 as of march,2024). Now, follow the following steps. 
 
-1.Open command prompt. Go to a directory where you want to clone this project. Use this command to clone the project.
+1.Open the command prompt. Go to a directory where you want to clone this project. Use this command to clone the project.
 
 ```bash
 git clone https://github.com/rd003/BookShoppingCart-Mvc
@@ -61,7 +61,7 @@ git clone https://github.com/rd003/BookShoppingCart-Mvc
 //}
 ```
 
-Uncomment these line and run the project. `Now stop the project and comment these lines again.`
+Uncomment these line and run the project. `Now stop the project and comment these lines again.` I could automate this process, but source code will differ from the youtube video. So I am keeping it as it is.
 
 2.Now click on login and login with these credentials.
 
