@@ -20,39 +20,34 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
 
 I am assuming that, you already have installed **Visual Studio 2022** (It is the latest as of january,2025) (or you can use `Rider` or `vs code`) and **MS SQL Server Management Studio** (I am using mssql server 2022 as of march,2024). Now, follow the following steps. 
 
-1.Open the command prompt. Go to a directory where you want to clone this project. Use this command to clone the project.
+1. Open the command prompt. Go to a directory where you want to clone this project. Use this command to clone the project.
 
 ```bash
 git clone https://github.com/rd003/BookShoppingCart-Mvc
 ```
 
-2.Go to the directory where you have cloned this project, open the directory `BookShoppingCart-Mvc`. You will find a file with name `BookShoppingCartMvc.sln`. Double click on this file and this project will be opened in Visual Studio.
+2. Go to the directory where you have cloned this project, open the directory `BookShoppingCart-Mvc`. You will find a file with name `BookShoppingCartMvc.sln`. Double click on this file and this project will be opened in Visual Studio.
 
-3.Open `appsettings.json` file and update connection string
+3. Open `appsettings.json` file and update connection string
 
 ```json
 "ConnectionStrings": {
   "conn": "data source=your_server_name;initial catalog=MovieStoreMvc; integrated security=true;encrypt=false"
 }
 ```
+4. Open Tools > Package Manager > Package manager console
 
-4.Delete `Migrations` folder.
-
-5.Open Tools > Package Manager > Package manager console
-
-6.Run these 2 commands (works only with Visual studio)
+5. Run this command (works only with Visual studio)
 
 ```bash
-  add-migration init
-
-  update-database
+    update-database
 ```
 
-7.Now you can run this project.
+6. Now you can run this project.
 
 ## How to register as admin and login?? 🧑‍💻🧑‍💻
 
-1.Open the `Program.cs` file , you will find these commented lines
+1. Open the `Program.cs` file , you will find these commented lines
 
 ```c#
 //using(var scope = app.Services.CreateScope())
@@ -61,9 +56,9 @@ git clone https://github.com/rd003/BookShoppingCart-Mvc
 //}
 ```
 
-Uncomment these line and run the project. `Now stop the project and comment these lines again.` I could automate this process, but source code will differ from the youtube video. So I am keeping it as it is.
+Uncomment these line and run the project. `Now stop the project and comment these lines again.` I know, I have messed up here, I should have automate this process. But I can not do it now, the source code will differ from the youtube video. So I am keeping it as it is.
 
-2.Now click on login and login with these credentials.
+2. Now click on the link named `login` and login with these credentials.
 
 ```text
 username: admin@gmail.com
