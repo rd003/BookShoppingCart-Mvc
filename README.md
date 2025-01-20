@@ -18,7 +18,7 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
 
 ## How to run the project?🌐
 
-I am assuming that, you already have installed **Visual Studio 2022** (It is the latest as of january,2025) (or you can use `Rider` or `vs code`) and **MS SQL Server Management Studio** (I am using mssql server 2022 as of march,2024). Now, follow the following steps. 
+I am assuming that, you already have installed **Visual Studio 2022** (It is the latest as of january,2025) (or you can use `Rider` or `vs code`) and **MS SQL Server Management Studio** (you can also use azure data study and may be there are any other gui tool for sql server, I am using mssql server 2022 as of jan,2025). Now, follow the following steps. 
 
 1. Open the command prompt. Go to a directory where you want to clone this project. Use this command to clone the project.
 
@@ -42,23 +42,17 @@ git clone https://github.com/rd003/BookShoppingCart-Mvc
 ```bash
     update-database
 ```
+If you are using .net cli then run the command
+
+```bash
+ dotnet ef database update
+```
 
 6. Now you can run this project.
 
 ## How to register as admin and login?? 🧑‍💻🧑‍💻
 
-1. Open the `Program.cs` file , you will find these commented lines
-
-```c#
-//using(var scope = app.Services.CreateScope())
-//{
-//    await DbSeeder.SeedDefaultData(scope.ServiceProvider);
-//}
-```
-
-Uncomment these line and run the project. `Now stop the project and comment these lines again.` I know, I have messed up here, I should have automate this process. But I can not do it now, the source code will differ from the youtube video. So I am keeping it as it is.
-
-2. Now click on the link named `login` and login with these credentials.
+Click on the link named `login` and login with these credentials.
 
 ```text
 username: admin@gmail.com
@@ -186,7 +180,7 @@ Please, run these scripts in a order. Genre data must be added before book.
 
 ```
 
-## Other useful sql scripts
+## Scripts for stored procedures used in this project
 
 You also need to add this stored procedure in your database.
 
