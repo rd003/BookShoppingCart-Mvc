@@ -50,9 +50,9 @@ If you are using .net cli then run the command
 
 6. Now you can run this project.
 
-## How to register as admin and login?? 🧑‍💻🧑‍💻
+## How to logged-in with admin account?? 🧑‍💻🧑‍💻
 
-Click on the link named `login` and login with these credentials.
+Admin is automatically created when you run the project for the first time. Click on the link named `login` and get logged-in with these credentials.
 
 ```text
 username: admin@gmail.com
