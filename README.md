@@ -12,13 +12,18 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
    - Identity Core (Authentication)
    - Bootstrap 5 (frontend)
 
+## Tools I have used and their alternative
+
+- Visual Studio 2022 (Alternatives (.NET SDK + VS Code or .NET SDK + JetBrains Rider)
+- Microsoft Sql Server Management Studio (Alternative Azure data studio or you can just execute sql from terminal)
+
+Note: Every tool and tech is free for personal use. 
+
 ## Video tutorial 📺
 
 [Youtube playlist](https://www.youtube.com/watch?v=R4ZLWD89R5w&list=PLP8UhDwXI7f_8r2Rbt7GNwf7eXZqUu_p4)
 
 ## How to run the project?🌐
-
-I am assuming that, you already have installed **Visual Studio 2022** (It is the latest as of january,2025) (or you can use `Rider` or `vs code`) and **MS SQL Server Management Studio** (you can also use azure data study and may be there are any other gui tool for sql server, I am using mssql server 2022 as of jan,2025). Now, follow the following steps. 
 
 1. Open the command prompt. Go to a directory where you want to clone this project. Use this command to clone the project.
 
