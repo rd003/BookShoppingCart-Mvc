@@ -69,7 +69,7 @@ public class DbSeeder
                      10 
                      FROM Book b
                      WHERE NOT EXISTS (
-                     SELECT * FROM [Order]
+                     SELECT * FROM [Stock]
                      );
            ");
             }
