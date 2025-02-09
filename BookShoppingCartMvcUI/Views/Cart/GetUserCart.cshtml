@@ -3,6 +3,7 @@
     ViewData["Title"] = "GetUserCart";
 }
 
+
 <div style="width:90%;margin:auto" class="mt-2">
     @if (Model != null && Model.CartDetails != null && Model.CartDetails.Count > 0)
     {
@@ -35,8 +36,21 @@
                     <td>@item.Book.Price X @item.Quantity</td>
                     <td>@(item.Book.Price * item.Quantity)</td>
                     <td>
+                        <select class="form-control quantity-selector" data-book-id="@item.BookId">
+                            @for(int q=1;q<10;q++)
+                            {
+                              @if(item.Quantity==q)
+                              {
+                                <option selected value="@q">@q</option>
+                              }
+                              else
+                              {
+                                <option value="@q">@q</option>
+                              }
+                            }
+                        </select>
                         @* Increase Quantity button should be invisible if not enough stock*@
-                        @if (item.Quantity < item.Book.Stock.Quantity)
+                        @* @if (item.Quantity < item.Book.Stock.Quantity)
                         {
                             <a class="btn btn-info" href="/Cart/AddItem?bookId=@item.BookId&&redirect=1">+</a>
                         }
@@ -45,7 +59,7 @@
                             <span style="border: 1px solid;padding: 8px 8px;color: red;border-radius: 5px;margin-right:4px">Out of stock </span>
                         }
                         @* Decrement button *@
-                        <a class="btn btn-info" href="/cart/removeitem?bookid=@item.BookId">-</a>
+                        @*<a class="btn btn-info" href="/cart/removeitem?bookid=@item.BookId">-</a> *@
                     </td>
                 </tr>
             }
@@ -67,3 +81,22 @@
     }
 </div>
 
+<script>
+document.addEventListener('DOMContentLoaded', (event) => {
+    const qtySelectors = document.querySelectorAll('.quantity-selector');
+     qtySelectors.forEach(
+            selectElement=>{
+                console.log(selectElement);
+                selectElement.addEventListener('change',function(){
+                    let selectedQuantity=this.value;
+                    let bookId=this.getAttribute('data-book-id');
+                    if(selectedQuantity && bookId)
+                    {
+                      window.location.href=`/Cart/UpdateCartItem?bookId=${bookId}&qty=${selectedQuantity}`;
+                    }
+                })
+            }
+        )
+
+    });
+</script>

@@ -125,7 +125,7 @@ namespace BookShoppingCartMvcUI.Repositories
             var data = await (from cart in _db.ShoppingCarts
                               join cartDetail in _db.CartDetails
                               on cart.Id equals cartDetail.ShoppingCartId
-                              where cart.UserId==userId // updated line
+                              where cart.UserId == userId // updated line
                               select new { cartDetail.Id }
                         ).ToListAsync();
             return data.Count;
@@ -155,17 +155,17 @@ namespace BookShoppingCartMvcUI.Repositories
                 {
                     UserId = userId,
                     CreateDate = DateTime.UtcNow,
-                    Name=model.Name,
-                    Email=model.Email,
-                    MobileNumber=model.MobileNumber,
-                    PaymentMethod=model.PaymentMethod,
-                    Address=model.Address,
-                    IsPaid=false,
+                    Name = model.Name,
+                    Email = model.Email,
+                    MobileNumber = model.MobileNumber,
+                    PaymentMethod = model.PaymentMethod,
+                    Address = model.Address,
+                    IsPaid = false,
                     OrderStatusId = pendingRecord.Id
                 };
                 _db.Orders.Add(order);
                 _db.SaveChanges();
-                foreach(var item in cartDetail)
+                foreach (var item in cartDetail)
                 {
                     var orderDetail = new OrderDetail
                     {
@@ -211,6 +211,48 @@ namespace BookShoppingCartMvcUI.Repositories
             var principal = _httpContextAccessor.HttpContext.User;
             string userId = _userManager.GetUserId(principal);
             return userId;
+        }
+
+        public async Task UpdateCartQuantity(int bookId, int qty)
+        {
+            if (qty < 1)
+            {
+                throw new ArgumentException("Quantity should be greater than 0", nameof(qty));
+            }
+            string userId = GetUserId();
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new UnauthorizedAccessException("User is not logged-in");
+            }
+            // var cart = await GetCart(userId);
+            // if (cart is null)
+            // {
+            //     throw new InvalidOperationException("Cart does not exists");
+            // }
+            // var cartItem = _db.CartDetails
+            //                   .FirstOrDefault(a => a.ShoppingCartId == cart.Id && a.BookId == bookId);
+            // if (cartItem == null)
+            // {
+            //     throw new InvalidOperationException("Cart item can not be null");
+            // }
+
+            var cart = _db.ShoppingCarts
+                        .Include(c => c.CartDetails)
+                        .FirstOrDefault(a => a.UserId == userId);
+            if (cart == null)
+            {
+                throw new InvalidOperationException("Cart does not exist.");
+            }
+
+            var cartItem = cart.CartDetails.FirstOrDefault(item => item.BookId == bookId);
+            if (cartItem == null)
+            {
+                throw new InvalidOperationException("Cart item can not be null");
+            }
+
+            cartItem.Quantity = qty;
+
+            await _db.SaveChangesAsync();
         }
 
 
