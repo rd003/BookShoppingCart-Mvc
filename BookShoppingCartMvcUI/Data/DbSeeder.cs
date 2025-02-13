@@ -78,9 +78,6 @@ public class DbSeeder
             {
                 await SeedOrderStatusAsync(context);
             }
-
-            await CreateProcedure_GetTopNSellingBooksByDate(context);
-
         }
         catch (Exception ex)
         {
@@ -171,37 +168,6 @@ public class DbSeeder
 
         await context.Books.AddRangeAsync(books);
         await context.SaveChangesAsync();
-    }
-
-    private static async Task CreateProcedure_GetTopNSellingBooksByDate(ApplicationDbContext context)
-    {
-        string sql = @"
- IF NOT EXISTS (SELECT * FROM sys.procedures WHERE name = 'Usp_GetTopNSellingBooksByDate' AND type = 'P')
-BEGIN
-    EXEC ('CREATE PROCEDURE [dbo].[Usp_GetTopNSellingBooksByDate]
-    @startDate datetime,
-    @endDate datetime
-    AS
-    BEGIN
-        SET NOCOUNT ON;
-
-        WITH UnitSold AS
-        (
-            SELECT od.BookId, SUM(od.Quantity) AS TotalUnitSold 
-            FROM [Order] o 
-            JOIN OrderDetail od ON o.Id = od.OrderId
-            WHERE o.IsPaid = 1 AND o.IsDeleted = 0 AND o.CreateDate BETWEEN @startDate AND @endDate
-            GROUP BY od.BookId
-        )
-        SELECT TOP 5 b.BookName, b.AuthorName, b.[Image], us.TotalUnitSold 
-        FROM UnitSold us
-        JOIN [Book] b ON us.BookId = b.Id
-        ORDER BY us.TotalUnitSold DESC;
-    END');
-   END
-  ";
-
-        await context.Database.ExecuteSqlRawAsync(sql);
     }
 
     #endregion
