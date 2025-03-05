@@ -132,13 +132,12 @@ namespace BookShoppingCartMvcUI.Repositories
             {
                 userId = GetUserId();
             }
-            var data = await (from cart in _db.ShoppingCarts
-                              join cartDetail in _db.CartDetails
-                              on cart.Id equals cartDetail.ShoppingCartId
-                              where cart.UserId == userId // updated line
-                              select new { cartDetail.Id }
-                        ).ToListAsync();
-            return data.Count;
+            var data = await _db.ShoppingCarts
+                                .Include(c => c.CartDetails)
+                                .Where(c => c.UserId == userId)
+                                .SelectMany(c => c.CartDetails)
+                                .CountAsync();
+            return data;
         }
 
         public async Task<bool> DoCheckout(CheckoutModel model)
