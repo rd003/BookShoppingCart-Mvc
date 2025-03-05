@@ -210,10 +210,10 @@ namespace BookShoppingCartMvcUI.Repositories
                 await transaction.CommitAsync();
                 return true;
             }
-            catch (Exception ex)
+            catch
             {
 
-                return false;
+                throw;
             }
         }
 
