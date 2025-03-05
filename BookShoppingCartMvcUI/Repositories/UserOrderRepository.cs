@@ -35,11 +35,6 @@ namespace BookShoppingCartMvcUI.Repositories
             return await _db.Orders.FindAsync(id);
         }
 
-        // public async Task<IEnumerable<OrderStatus>> GetOrderStatuses()
-        // {
-        //     return await _db.orderStatuses.ToListAsync();
-        // }
-
         public async Task TogglePaymentStatus(int orderId)
         {
             var order = await _db.Orders.FindAsync(orderId);

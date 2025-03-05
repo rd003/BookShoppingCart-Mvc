@@ -1,15 +1,15 @@
-﻿@if (TempData["successMessage"] is not null)
+﻿@if (TempData[NotificationType.SuccessMessage] is not null)
 {
     <div class="alert alert-success alert-dismissible fade show" role="alert">
-        @TempData["successMessage"]
+        @TempData[NotificationType.SuccessMessage]
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
 
-@if (TempData["errorMessage"] is not null)
+@if (TempData[NotificationType.ErrorMessage] is not null)
 {
     <div class="alert alert-danger alert-dismissible fade show" role="alert">
-        @TempData["errorMessage"]
+        @TempData[NotificationType.ErrorMessage]
         <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
     </div>
 }
