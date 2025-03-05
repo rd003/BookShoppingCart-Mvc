@@ -19,7 +19,7 @@ namespace BookShoppingCartMvcUI.Repositories
         public async Task<int> AddItem(int bookId, int qty)
         {
             string userId = GetUserId();
-            using var transaction = _db.Database.BeginTransaction();
+            using var transaction = await _db.Database.BeginTransactionAsync();
             try
             {
                 if (string.IsNullOrEmpty(userId))
@@ -56,7 +56,7 @@ namespace BookShoppingCartMvcUI.Repositories
                     _db.CartDetails.Add(cartItem);
                 }
                 await _db.SaveChangesAsync();
-                transaction.Commit();
+                await transaction.CommitAsync();
 
                 var cartItemCount = await GetCartItemCount(userId);
                 return cartItemCount;
@@ -71,7 +71,6 @@ namespace BookShoppingCartMvcUI.Repositories
 
         public async Task<int> RemoveItem(int bookId)
         {
-            //using var transaction = _db.Database.BeginTransaction();
             string userId = GetUserId();
             try
             {
@@ -142,7 +141,7 @@ namespace BookShoppingCartMvcUI.Repositories
 
         public async Task<bool> DoCheckout(CheckoutModel model)
         {
-            using var transaction = _db.Database.BeginTransaction();
+            using var transaction = await _db.Database.BeginTransactionAsync();
             try
             {
                 // logic
@@ -172,8 +171,9 @@ namespace BookShoppingCartMvcUI.Repositories
                     IsPaid = false,
                     OrderStatus = OrderStatus.Pending
                 };
-                _db.Orders.Add(order);
-                _db.SaveChanges();
+                //_db.Orders.Add(order);
+                //await _db.SaveChangesAsync();
+
                 foreach (var item in cartDetail)
                 {
                     var orderDetail = new OrderDetail
@@ -181,7 +181,8 @@ namespace BookShoppingCartMvcUI.Repositories
                         BookId = item.BookId,
                         OrderId = order.Id,
                         Quantity = item.Quantity,
-                        UnitPrice = item.UnitPrice
+                        UnitPrice = item.UnitPrice,
+                        Order = order
                     };
                     _db.OrderDetails.Add(orderDetail);
 
@@ -200,12 +201,13 @@ namespace BookShoppingCartMvcUI.Repositories
                     // decrease the number of quantity from the stock table
                     stock.Quantity -= item.Quantity;
                 }
-                //_db.SaveChanges();
 
                 // removing the cartdetails
                 _db.CartDetails.RemoveRange(cartDetail);
-                _db.SaveChanges();
-                transaction.Commit();
+
+                await _db.SaveChangesAsync();
+
+                await transaction.CommitAsync();
                 return true;
             }
             catch (Exception ex)
