@@ -1,5 +1,4 @@
-﻿using BookShoppingCartMvcUI.Constants;
-using Microsoft.AspNetCore.Authorization;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 
@@ -40,14 +39,21 @@ public class AdminOperationsController : Controller
         {
             throw new InvalidOperationException($"Order with id:{orderId} does not found.");
         }
-        var orderStatusList = (await _userOrderRepository.GetOrderStatuses()).Select(orderStatus =>
-        {
-            return new SelectListItem { Value = orderStatus.Id.ToString(), Text = orderStatus.StatusName, Selected = order.OrderStatusId == orderStatus.Id };
-        });
+        var orderStatusList = Enum.GetValues(typeof(OrderStatus))
+                .Cast<OrderStatus>()
+                .Select(orderStatus =>
+                {
+                    return new SelectListItem
+                    {
+                        Value = ((int)orderStatus).ToString(),
+                        Text = orderStatus.ToString()
+                    };
+                });
+
         var data = new UpdateOrderStatusModel
         {
             OrderId = orderId,
-            OrderStatusId = order.OrderStatusId,
+            OrderStatus = order.OrderStatus,
             OrderStatusList = orderStatusList
         };
         return View(data);
@@ -60,13 +66,20 @@ public class AdminOperationsController : Controller
         {
             if (!ModelState.IsValid)
             {
-                data.OrderStatusList = (await _userOrderRepository.GetOrderStatuses()).Select(orderStatus =>
-                {
-                    return new SelectListItem { Value = orderStatus.Id.ToString(), Text = orderStatus.StatusName, Selected = orderStatus.Id == data.OrderStatusId };
-                });
-
+                data.OrderStatusList = Enum.GetValues(typeof(OrderStatus))
+               .Cast<OrderStatus>()
+               .Select(orderStatus =>
+               {
+                   return new SelectListItem
+                   {
+                       Value = ((int)orderStatus).ToString(),
+                       Text = orderStatus.ToString(),
+                       Selected = orderStatus == data.OrderStatus
+                   };
+               });
                 return View(data);
             }
+
             await _userOrderRepository.ChangeOrderStatus(data);
             TempData["msg"] = "Updated successfully";
         }

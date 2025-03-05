@@ -16,7 +16,7 @@
             {
                 <tr>
                     <td>@order.CreateDate.ToString("dd-MM-yyyy")</td>
-                    <td>@order.OrderStatus.StatusName</td>
+                    <td>@order.OrderStatus</td>
                 </tr>
                 @if (order.OrderDetail != null && order.OrderDetail.Count > 0)
                 {

@@ -13,10 +13,10 @@
 
     <div class="mb-2">
         <label>Order status</label>
-        <select class="form-control" asp-for="OrderStatusId" asp-items="@Model.OrderStatusList">
+        <select class="form-control" asp-for="OrderStatus" asp-items="@Model.OrderStatusList">
             <option value="">Select order status</option>
         </select>
-        <span class="text-danger" asp-validation-for="OrderStatusId"></span>
+        <span class="text-danger" asp-validation-for="OrderStatus"></span>
     </div>
     <button type="submit" class="btn btn-primary">Update</button>
 

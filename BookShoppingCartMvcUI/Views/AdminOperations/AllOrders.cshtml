@@ -27,8 +27,8 @@
                     <td>@order.MobileNumber</td>
                     <td>@order.Email</td>
                     <td>@order.Address</td>
-                    <td>@order.PaymentMethod | @(order.IsPaid ? "Paid" : "Not Paid")</td>
-                    <td>@order.OrderStatus.StatusName</td>
+                    <td>@order.PaymentMethod | @(order.PaymentStatus)</td>
+                    <td>@order.OrderStatus</td>
                     <td>
                         <button type="button" data-bs-toggle="modal" data-bs-target="#modal-@order.Id" class="btn btn-primary">
                             Order-Detail

@@ -26,7 +26,7 @@ namespace BookShoppingCartMvcUI.Repositories
             {
                 throw new InvalidOperationException($"order withi id:{data.OrderId} does not found");
             }
-            order.OrderStatusId = data.OrderStatusId;
+            order.OrderStatus = data.OrderStatus;
             await _db.SaveChangesAsync();
         }
 
@@ -35,10 +35,10 @@ namespace BookShoppingCartMvcUI.Repositories
             return await _db.Orders.FindAsync(id);
         }
 
-        public async Task<IEnumerable<OrderStatus>> GetOrderStatuses()
-        {
-            return await _db.orderStatuses.ToListAsync();
-        }
+        // public async Task<IEnumerable<OrderStatus>> GetOrderStatuses()
+        // {
+        //     return await _db.orderStatuses.ToListAsync();
+        // }
 
         public async Task TogglePaymentStatus(int orderId)
         {
@@ -54,7 +54,6 @@ namespace BookShoppingCartMvcUI.Repositories
         public async Task<IEnumerable<Order>> UserOrders(bool getAll = false)
         {
             var orders = _db.Orders
-                           .Include(x => x.OrderStatus)
                            .Include(x => x.OrderDetail)
                            .ThenInclude(x => x.Book)
                            .ThenInclude(x => x.Genre).AsQueryable();

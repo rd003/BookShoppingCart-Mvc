@@ -125,7 +125,7 @@ namespace BookShoppingCartMvcUI.Repositories
             var data = await (from cart in _db.ShoppingCarts
                               join cartDetail in _db.CartDetails
                               on cart.Id equals cartDetail.ShoppingCartId
-                              where cart.UserId==userId // updated line
+                              where cart.UserId == userId // updated line
                               select new { cartDetail.Id }
                         ).ToListAsync();
             return data.Count;
@@ -141,31 +141,31 @@ namespace BookShoppingCartMvcUI.Repositories
                 var userId = GetUserId();
                 if (string.IsNullOrEmpty(userId))
                     throw new UnauthorizedAccessException("User is not logged-in");
+
                 var cart = await GetCart(userId);
                 if (cart is null)
                     throw new InvalidOperationException("Invalid cart");
+
                 var cartDetail = _db.CartDetails
                                     .Where(a => a.ShoppingCartId == cart.Id).ToList();
                 if (cartDetail.Count == 0)
                     throw new InvalidOperationException("Cart is empty");
-                var pendingRecord = _db.orderStatuses.FirstOrDefault(s => s.StatusName == "Pending");
-                if (pendingRecord is null)
-                    throw new InvalidOperationException("Order status does not have Pending status");
+
                 var order = new Order
                 {
                     UserId = userId,
                     CreateDate = DateTime.UtcNow,
-                    Name=model.Name,
-                    Email=model.Email,
-                    MobileNumber=model.MobileNumber,
-                    PaymentMethod=model.PaymentMethod,
-                    Address=model.Address,
-                    IsPaid=false,
-                    OrderStatusId = pendingRecord.Id
+                    Name = model.Name,
+                    Email = model.Email,
+                    MobileNumber = model.MobileNumber,
+                    PaymentMethod = model.PaymentMethod,
+                    Address = model.Address,
+                    IsPaid = false,
+                    OrderStatus = OrderStatus.Pending
                 };
                 _db.Orders.Add(order);
                 _db.SaveChanges();
-                foreach(var item in cartDetail)
+                foreach (var item in cartDetail)
                 {
                     var orderDetail = new OrderDetail
                     {

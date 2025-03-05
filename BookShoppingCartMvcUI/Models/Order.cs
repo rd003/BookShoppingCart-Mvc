@@ -8,10 +8,9 @@ namespace BookShoppingCartMvcUI.Models
     {
         public int Id { get; set; }
         [Required]
-        public string UserId { get; set; }
+        public string? UserId { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.UtcNow;
-        [Required]
-        public int OrderStatusId { get; set; }
+
         public bool IsDeleted { get; set; } = false;
         [Required]
         [MaxLength(30)]
@@ -30,8 +29,11 @@ namespace BookShoppingCartMvcUI.Models
         [MaxLength(30)]
         public string? PaymentMethod { get; set; }
         public bool IsPaid { get; set; }
-
         public OrderStatus OrderStatus { get; set; }
-        public List<OrderDetail> OrderDetail { get; set; }
+
+        public List<OrderDetail> OrderDetail { get; set; } = [];
+
+        [NotMapped]
+        public string PaymentStatus => IsPaid ? "Paid" : "Not Paid";
     }
 }
