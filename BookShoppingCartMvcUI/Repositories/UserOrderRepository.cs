@@ -58,7 +58,7 @@ namespace BookShoppingCartMvcUI.Repositories
                 if (string.IsNullOrEmpty(userId))
                     throw new Exception("User is not logged-in");
                 orders = orders.Where(a => a.UserId == userId);
-                return await orders.ToListAsync();
+//                return await orders.ToListAsync();
             }
 
             return await orders.ToListAsync();
