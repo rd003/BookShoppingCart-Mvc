@@ -32,19 +32,24 @@ namespace BookShoppingCartMvcUI.Repositories
 
         public async Task<IEnumerable<StockDisplayModel>> GetStocks(string sTerm = "")
         {
-            var stocks = await (from book in _context.Books
-                                join stock in _context.Stocks
-                                on book.Id equals stock.BookId
-                                into book_stock
-                                from bookStock in book_stock.DefaultIfEmpty()
-                                where string.IsNullOrWhiteSpace(sTerm) || book.BookName.ToLower().Contains(sTerm.ToLower())
-                                select new StockDisplayModel
-                                {
-                                    BookId = book.Id,
-                                    BookName = book.BookName,
-                                    Quantity = bookStock == null ? 0 : bookStock.Quantity
-                                }
-                                ).ToListAsync();
+            var stocksQuery = _context.Books
+                                      .AsNoTracking()
+                                      .Include(b => b.Stock)
+                                      .AsNoTracking();
+
+            if(!string.IsNullOrWhiteSpace(sTerm))
+            {
+                stocksQuery = stocksQuery.Where(b => b.BookName.StartsWith(sTerm.ToLower()));
+            }
+
+            var stocks = stocksQuery
+                .AsNoTracking()
+                .Select(book => new StockDisplayModel
+                {
+                    BookId = book.Id,
+                    BookName = book.BookName,
+                    Quantity = book.Stock == null ? 0 : book.Stock.Quantity
+                });
             return stocks;
         }
 
