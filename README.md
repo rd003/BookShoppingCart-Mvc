@@ -14,8 +14,8 @@ It is a source code of the youtube tutorial on [book shopping cart in .net core 
 
 ## Tools I have used and their alternative
 
-- Visual Studio 2022 (Alternatives (.NET SDK + VS Code or .NET SDK + JetBrains Rider)
-- Microsoft Sql Server Management Studio (Alternative Azure data studio or you can just execute sql from terminal)
+- Visual Studio 2022 (Alternatives : .NET SDK + VS Code or .NET SDK + JetBrains Rider)
+- Microsoft Sql Server Management Studio (Alternative : Azure data studio / mssql extension for vscode)
 
 Note: Every tool and tech is free for personal use. 
 
