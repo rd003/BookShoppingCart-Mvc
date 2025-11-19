@@ -2,11 +2,11 @@
 
 It is a source code of the youtube tutorial on [Build a Full E-commerce Application Using .NET Core 9, SQL Server, MVC | Complete Tutorial](https://youtu.be/_NzPJSofid8?si=jHuiACNd3dxzT1Go). Initially it was designed to explain how shopping cart 🛒 works in dot net core mvc. But now it has more features except payment gateway. A ⭐ in repository is highly appreciated, helps to promote my content.
 
-📢 Initially , this project was built with .net 7. But it is **Upgraded to .net 9.0.** now and I will try to keep it up to date.
+📢 Initially , this project was built with .net 7. But it is **Upgraded to .net 10.0.** now and I will try to keep it up to date.
 
 ## Tech stack 🧑‍💻
 
-   - Dotnet core mvc (.Net 9)
+   - Dotnet core mvc (.Net 10.0)
    - MS SQLServer 2022 (Database)
    - Entity Framework Core (ORM)
    - Identity Core (Authentication)
@@ -14,7 +14,7 @@ It is a source code of the youtube tutorial on [Build a Full E-commerce Applicat
 
 ## Tools I have used and their alternative
 
-- Visual Studio 2022 (Alternatives : .NET SDK + VS Code or .NET SDK + JetBrains Rider).
+- Visual Studio 2026 (Alternatives : .NET SDK + VS Code or .NET SDK + JetBrains Rider).
 - Microsoft Sql Server Management Studio (Alternative : mssql extension for vscode / dbeaver).
 - Instead of manually installing `sql server`, you can also used `sql server` which is spun up in `docker`.
 
