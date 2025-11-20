@@ -1,18 +1,18 @@
 # BookShoppingCartMvc (A basic e-comm system for beginners)📚🛒
 
-It is a source code of the youtube tutorial on [Build a Full E-commerce Application Using .NET Core 10, SQL Server, MVC | Complete Tutorial](https://youtu.be/_NzPJSofid8?si=jHuiACNd3dxzT1Go). Initially it was designed to explain how shopping cart 🛒 works in dot net core mvc. But now it has more features except payment gateway. A ⭐ in repository is highly appreciated, helps to promote my content.
+It is a source code of the youtube tutorial on [Build a Full E-commerce Application Using .NET Core 10, SQL Server 2025, MVC | Complete Tutorial](https://youtu.be/_NzPJSofid8?si=jHuiACNd3dxzT1Go). Initially it was designed to explain how shopping cart 🛒 works in dot net core mvc. But now it has more features except payment gateway. A ⭐ in repository is highly appreciated, helps to promote my content.
 
-📢 Initially , this project was built with .net 7. But it is **Upgraded to .net 10.0.** now and I will try to keep it up to date.
+📢 Initially , this project was built with `.net 7` and `sql server 2022`. But it is `Upgraded to .net 10.0` and `sql server 2025` and I will try to keep it up to date.
 
 ## Tech stack 🧑‍💻
 
    - Dotnet core mvc (.Net 10.0)
-   - MS SQLServer 2022 (Database)
+   - MS SQLServer 2025 (Database)
    - Entity Framework Core (ORM)
    - Identity Core (Authentication)
    - Bootstrap 5 (frontend)
 
-## Tools I have used and their alternative
+## Tools I have used and their alternative (Updated versions)
 
 - Visual Studio 2026 (Alternatives : .NET SDK + VS Code or .NET SDK + JetBrains Rider).
 - Microsoft Sql Server Management Studio (Alternative : mssql extension for vscode / dbeaver).
@@ -43,7 +43,7 @@ docker compose up -d
 
 Make sure:
 - Either Dotnet sdk 10.0 or VisualStudio 2026 pre-installed in your machine
-- pre-installed Sql server 2022+ or spun up it in docker container
+- pre-installed Sql server 2025 or spun up it in docker container
 
 Now, you can follow these steps:
 
@@ -63,7 +63,7 @@ git clone https://github.com/rd003/BookShoppingCart-Mvc
 }
 ```
 
-**Note:** It is not mandatory to install `sql server 2022` in your machine. You can spin up the `sql server` in docker container and use that for this application. But in this case your connection string will be different `Server=localhost,1433;Database=BookShoppingCartMvc;User Id=sa;Password=your_password;TrustServerCertificate=True`.
+**Note:** It is not mandatory to install `sql server 2025` in your machine. You can spin up the `sql server` in docker container and use that for this application. But in this case your connection string will be different `Server=localhost,1433;Database=BookShoppingCartMvc;User Id=sa;Password=your_password;TrustServerCertificate=True`.
 
 4. Run the project.
 
